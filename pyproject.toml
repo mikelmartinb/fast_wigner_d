@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=77", "Cython>=3.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fast-wigner-d"
+version = "0.1.0"
+description = "Fast, robust Wigner d- and D-matrices for any integer or half-integer spin"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Mikel Martin", email = "mikel.martin@uam.es" }]
+requires-python = ">=3.9"
+dependencies = ["numpy>=1.21"]
+keywords = [
+    "wigner", "wigner-d", "rotation matrix", "angular momentum", "spin",
+    "half-integer", "jacobi polynomials", "quantum mechanics", "spherical harmonics",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Cython",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Typing :: Typed",
+]
+
+# TODO: point these at the public repository before the first release
+# [project.urls]
+# Homepage = "https://github.com/<user>/fast-wigner-d"
+# Issues = "https://github.com/<user>/fast-wigner-d/issues"
+
+[project.optional-dependencies]
+test = ["pytest", "mpmath"]
+benchmark = ["mpmath", "scipy", "sympy", "spherical", "wigner", "matplotlib"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+fast_wigner_d = ["py.typed", "*.pyi"]
+
+[tool.setuptools.exclude-package-data]
+fast_wigner_d = ["*.pyx", "*.c"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.cibuildwheel]
+# 32-bit targets are skipped (on i686, x87 extended precision would also break
+# the exact double-double sums used for the log-factorials)
+skip = ["*-win32", "*_i686"]
+test-requires = ["pytest", "mpmath"]
+test-command = "pytest {project}/tests -q"
+# fail loudly instead of silently shipping serial wheels
+environment = { FAST_WIGNER_D_OPENMP = "1" }
+
+[tool.cibuildwheel.macos]
+# Apple clang has no OpenMP runtime: take conda-forge's llvm-openmp (built for
+# macOS 11, unlike Homebrew's bottles); delocate then bundles libomp into the wheel
+before-all = [
+    "curl -Ls https://micro.mamba.pm/api/micromamba/osx-$(uname -m | sed s/x86_64/64/)/latest | tar -xj -C /tmp bin/micromamba",
+    "/tmp/bin/micromamba create -y -p /tmp/libomp -c conda-forge llvm-openmp",
+]
+environment = { FAST_WIGNER_D_OPENMP = "1", LIBOMP_PREFIX = "/tmp/libomp", MACOSX_DEPLOYMENT_TARGET = "11.0" }
