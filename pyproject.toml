@@ -29,7 +29,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 
-# TODO: point these at the public repository before the first release
+# TODO: add before the first release
 # [project.urls]
 # Homepage = "https://github.com/<user>/fast-wigner-d"
 # Issues = "https://github.com/<user>/fast-wigner-d/issues"
@@ -51,17 +51,15 @@ fast_wigner_d = ["*.pyx", "*.c"]
 testpaths = ["tests"]
 
 [tool.cibuildwheel]
-# 32-bit targets are skipped (on i686, x87 extended precision would also break
-# the exact double-double sums used for the log-factorials)
+# no 32-bit wheels (x87 precision on i686 breaks the double-double sums)
 skip = ["*-win32", "*_i686"]
 test-requires = ["pytest", "mpmath"]
 test-command = "pytest {project}/tests -q"
-# fail loudly instead of silently shipping serial wheels
+# fail rather than build serial wheels
 environment = { FAST_WIGNER_D_OPENMP = "1" }
 
 [tool.cibuildwheel.macos]
-# Apple clang has no OpenMP runtime: take conda-forge's llvm-openmp (built for
-# macOS 11, unlike Homebrew's bottles); delocate then bundles libomp into the wheel
+# libomp from conda-forge (targets macOS 11, unlike Homebrew); delocate bundles it
 before-all = [
     "curl -Ls https://micro.mamba.pm/api/micromamba/osx-$(uname -m | sed s/x86_64/64/)/latest | tar -xj -C /tmp bin/micromamba",
     "/tmp/bin/micromamba create -y -p /tmp/libomp -c conda-forge llvm-openmp",

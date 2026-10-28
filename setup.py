@@ -1,16 +1,8 @@
-"""Build the Cython extension, with OpenMP when the compiler supports it.
+"""Build the Cython extension, with OpenMP if a test program compiles with it.
 
-OpenMP is detected by compiling a small test program. Without it the code still
-works, but runs serially. Environment variables:
-
-* ``FAST_WIGNER_D_OPENMP=0`` builds without OpenMP; ``=1`` makes a missing
-  OpenMP a build error (default: use it if available).
-* ``LIBOMP_PREFIX``: where to find ``include/omp.h`` and ``lib/libomp`` on macOS,
-  where Apple clang needs the separate libomp runtime (``brew install libomp``
-  or ``conda install llvm-openmp``; Homebrew and ``CONDA_PREFIX`` are also
-  searched).
-* ``FAST_WIGNER_D_NATIVE=1`` adds ``-march=native`` (local builds only: the
-  binary will not run on other CPUs).
+Environment variables: FAST_WIGNER_D_OPENMP=0 / 1 disables / requires OpenMP;
+LIBOMP_PREFIX locates libomp on macOS (Homebrew and CONDA_PREFIX are also
+searched); FAST_WIGNER_D_NATIVE=1 adds -march=native (local builds only).
 """
 import os
 import subprocess
@@ -33,7 +25,7 @@ int main(void) {
 
 
 def _env_flag(name):
-    """True / False if the variable is set to a boolean-like value, else None."""
+    """True / False for boolean-like values, else None."""
     value = os.environ.get(name, "").strip().lower()
     if value in ("1", "on", "true", "yes"):
         return True
