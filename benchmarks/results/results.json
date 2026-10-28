@@ -1,0 +1,1486 @@
+{
+ "machine": {
+  "cpu": "Apple M5",
+  "cores": 10,
+  "os": "macOS-26.6-arm64-arm-64bit-Mach-O",
+  "python": "3.14.7",
+  "numpy_blas": "accelerate",
+  "openmp": true,
+  "omp_num_threads": "unset"
+ },
+ "versions": {
+  "fast-wigner-d": "0.1.0",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "sympy": "1.14.0",
+  "spherical": "1.1.4",
+  "wigner": "2025.1",
+  "mpmath": "1.3.0"
+ },
+ "methods": {
+  "fast_wigner_d": {
+   "label": "fast-wigner-d",
+   "package": "fast-wigner-d",
+   "half_integer": true,
+   "threads": "all cores (OpenMP)"
+  },
+  "fast_wigner_d_1thread": {
+   "label": "fast-wigner-d, 1 thread",
+   "package": "fast-wigner-d",
+   "half_integer": true,
+   "threads": "1"
+  },
+  "spherical": {
+   "label": "spherical",
+   "package": "spherical",
+   "half_integer": false,
+   "threads": "1"
+  },
+  "wigner": {
+   "label": "wigner (ntessore)",
+   "package": "wigner",
+   "half_integer": false,
+   "threads": "1"
+  },
+  "expm": {
+   "label": "scipy expm(-i beta J_y)",
+   "package": "scipy",
+   "half_integer": true,
+   "threads": "BLAS threads"
+  },
+  "eval_jacobi": {
+   "label": "scipy eval_jacobi formula",
+   "package": "scipy",
+   "half_integer": true,
+   "threads": "1"
+  },
+  "textbook": {
+   "label": "textbook sum (float64)",
+   "package": null,
+   "half_integer": true,
+   "threads": "1"
+  },
+  "sympy": {
+   "label": "sympy wigner_d_small",
+   "package": "sympy",
+   "half_integer": true,
+   "threads": "1"
+  }
+ },
+ "results": [
+  {
+   "method": "fast_wigner_d",
+   "two_j": 1,
+   "status": "ok",
+   "time": 1.0830117389559746e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 0.0,
+   "orthogonality": 1.1102230246251565e-16
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 1,
+   "status": "ok",
+   "time": 1.0830117389559746e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 0.0,
+   "orthogonality": 1.1102230246251565e-16
+  },
+  {
+   "method": "expm",
+   "two_j": 1,
+   "status": "ok",
+   "time": 1.374981366097927e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.1102230246251565e-16,
+   "orthogonality": 2.220446049250313e-16
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 1,
+   "status": "ok",
+   "time": 1.2500095181167126e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 0.0,
+   "orthogonality": 1.1102230246251565e-16
+  },
+  {
+   "method": "textbook",
+   "two_j": 1,
+   "status": "ok",
+   "time": 1.334003172814846e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 0.0,
+   "orthogonality": 1.1102230246251565e-16
+  },
+  {
+   "method": "sympy",
+   "two_j": 1,
+   "status": "ok",
+   "time": 0.00014000001829117537,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 0.0,
+   "orthogonality": 1.1102230246251565e-16
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 2,
+   "status": "ok",
+   "time": 1.1249794624745846e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.1102230246251565e-16,
+   "orthogonality": 3.3306690738754696e-16
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 2,
+   "status": "ok",
+   "time": 1.0840012691915035e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.1102230246251565e-16,
+   "orthogonality": 3.3306690738754696e-16
+  },
+  {
+   "method": "spherical",
+   "two_j": 2,
+   "status": "ok",
+   "time": 1.4160177670419216e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 3.122502256758253e-16,
+   "orthogonality": 6.314393452555578e-16
+  },
+  {
+   "method": "wigner",
+   "two_j": 2,
+   "status": "ok",
+   "time": 1.5840050764381886e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.1102230246251565e-16,
+   "orthogonality": 3.3306690738754696e-16
+  },
+  {
+   "method": "expm",
+   "two_j": 2,
+   "status": "ok",
+   "time": 1.6249832697212696e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 2.220446049250313e-15,
+   "orthogonality": 4.9960036108132044e-15
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 2,
+   "status": "ok",
+   "time": 1.2909877113997936e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.1102230246251565e-16,
+   "orthogonality": 3.3306690738754696e-16
+  },
+  {
+   "method": "textbook",
+   "two_j": 2,
+   "status": "ok",
+   "time": 3.1660310924053192e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.1102230246251565e-16,
+   "orthogonality": 3.3306690738754696e-16
+  },
+  {
+   "method": "sympy",
+   "two_j": 2,
+   "status": "ok",
+   "time": 0.0003013749956153333,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.1102230246251565e-16,
+   "orthogonality": 3.3306690738754696e-16
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 3,
+   "status": "ok",
+   "time": 1.125037670135498e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.1102230246251565e-16,
+   "orthogonality": 3.3306690738754696e-16
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 3,
+   "status": "ok",
+   "time": 1.1249794624745846e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.1102230246251565e-16,
+   "orthogonality": 3.3306690738754696e-16
+  },
+  {
+   "method": "expm",
+   "two_j": 3,
+   "status": "ok",
+   "time": 1.5840050764381886e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 2.0372592501871623e-14,
+   "orthogonality": 5.595524044110789e-14
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 3,
+   "status": "ok",
+   "time": 1.3544922694563866e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.1102230246251565e-16,
+   "orthogonality": 3.3306690738754696e-16
+  },
+  {
+   "method": "textbook",
+   "two_j": 3,
+   "status": "ok",
+   "time": 5.582987796515226e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.1102230246251565e-16,
+   "orthogonality": 3.3306690738754696e-16
+  },
+  {
+   "method": "sympy",
+   "two_j": 3,
+   "status": "ok",
+   "time": 0.0005760419880971313,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.1102230246251565e-16,
+   "orthogonality": 2.220446049250313e-16
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 4,
+   "status": "ok",
+   "time": 1.166015863418579e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 2.220446049250313e-16,
+   "orthogonality": 4.440892098500626e-16
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 4,
+   "status": "ok",
+   "time": 1.166015863418579e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 2.220446049250313e-16,
+   "orthogonality": 4.440892098500626e-16
+  },
+  {
+   "method": "spherical",
+   "two_j": 4,
+   "status": "ok",
+   "time": 1.5829573385417461e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 3.3306690738754696e-16,
+   "orthogonality": 6.661338147750939e-16
+  },
+  {
+   "method": "wigner",
+   "two_j": 4,
+   "status": "ok",
+   "time": 4.041008651256561e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 2.220446049250313e-16,
+   "orthogonality": 4.440892098500626e-16
+  },
+  {
+   "method": "expm",
+   "two_j": 4,
+   "status": "ok",
+   "time": 2.040993422269821e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 2.7755575615628914e-15,
+   "orthogonality": 6.994405055138486e-15
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 4,
+   "status": "ok",
+   "time": 1.3750395737588406e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 2.220446049250313e-16,
+   "orthogonality": 4.440892098500626e-16
+  },
+  {
+   "method": "textbook",
+   "two_j": 4,
+   "status": "ok",
+   "time": 9.374984074383974e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 3.3306690738754696e-16,
+   "orthogonality": 5.551115123125783e-16
+  },
+  {
+   "method": "sympy",
+   "two_j": 4,
+   "status": "ok",
+   "time": 0.0008287079981528223,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 2.220446049250313e-16,
+   "orthogonality": 4.440892098500626e-16
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 9,
+   "status": "ok",
+   "time": 1.333013642579317e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 4.440892098500626e-16,
+   "orthogonality": 9.992007221626409e-16
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 9,
+   "status": "ok",
+   "time": 1.292035449296236e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 4.440892098500626e-16,
+   "orthogonality": 9.992007221626409e-16
+  },
+  {
+   "method": "expm",
+   "two_j": 9,
+   "status": "ok",
+   "time": 3.2919924706220627e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 3.774758283725532e-15,
+   "orthogonality": 9.992007221626409e-15
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 9,
+   "status": "ok",
+   "time": 2.2919848561286926e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 7.771561172376096e-16,
+   "orthogonality": 1.1102230246251565e-15
+  },
+  {
+   "method": "textbook",
+   "two_j": 9,
+   "status": "ok",
+   "time": 4.899996565654874e-05,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 4.440892098500626e-16,
+   "orthogonality": 9.992007221626409e-16
+  },
+  {
+   "method": "sympy",
+   "two_j": 9,
+   "status": "ok",
+   "time": 0.0045614170376211405,
+   "n_calls": 131,
+   "n_angles": 3,
+   "error": 5.551115123125783e-16,
+   "orthogonality": 1.3322676295501878e-15
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 10,
+   "status": "ok",
+   "time": 1.374981366097927e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 4.440892098500626e-16,
+   "orthogonality": 1.1102230246251565e-15
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 10,
+   "status": "ok",
+   "time": 1.374981366097927e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 4.440892098500626e-16,
+   "orthogonality": 1.1102230246251565e-15
+  },
+  {
+   "method": "spherical",
+   "two_j": 10,
+   "status": "ok",
+   "time": 2.1249870769679546e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 4.996003610813204e-16,
+   "orthogonality": 1.5543122344752192e-15
+  },
+  {
+   "method": "wigner",
+   "two_j": 10,
+   "status": "ok",
+   "time": 1.837499439716339e-05,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.1657341758564144e-15,
+   "orthogonality": 2.6645352591003757e-15
+  },
+  {
+   "method": "expm",
+   "two_j": 10,
+   "status": "ok",
+   "time": 4.250032361596823e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 3.497202527569243e-15,
+   "orthogonality": 1.0019762797242038e-14
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 10,
+   "status": "ok",
+   "time": 2.5420449674129486e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 8.881784197001252e-16,
+   "orthogonality": 1.4432899320127035e-15
+  },
+  {
+   "method": "textbook",
+   "two_j": 10,
+   "status": "ok",
+   "time": 6.225000834092498e-05,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 9.43689570931383e-16,
+   "orthogonality": 2.1094237467877974e-15
+  },
+  {
+   "method": "sympy",
+   "two_j": 10,
+   "status": "ok",
+   "time": 0.005418958025984466,
+   "n_calls": 111,
+   "n_angles": 3,
+   "error": 7.771561172376096e-16,
+   "orthogonality": 1.7763568394002505e-15
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 19,
+   "status": "ok",
+   "time": 2.167013008147478e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 6.661338147750939e-16,
+   "orthogonality": 1.887379141862766e-15
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 19,
+   "status": "ok",
+   "time": 2.1249870769679546e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 6.661338147750939e-16,
+   "orthogonality": 1.887379141862766e-15
+  },
+  {
+   "method": "expm",
+   "two_j": 19,
+   "status": "ok",
+   "time": 1.4708028174936771e-05,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 6.439293542825908e-15,
+   "orthogonality": 1.687538997430238e-14
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 19,
+   "status": "ok",
+   "time": 6.874965038150549e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.942890293094024e-15,
+   "orthogonality": 3.6637359812630166e-15
+  },
+  {
+   "method": "textbook",
+   "two_j": 19,
+   "status": "ok",
+   "time": 0.0002939584956038743,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 9.270362255620057e-15,
+   "orthogonality": 1.3322676295501878e-14
+  },
+  {
+   "method": "sympy",
+   "two_j": 19,
+   "status": "ok",
+   "time": 0.027531666972208768,
+   "n_calls": 21,
+   "n_angles": 3,
+   "error": 4.496403249731884e-15,
+   "orthogonality": 5.329070518200751e-15
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 20,
+   "status": "ok",
+   "time": 2.2919848561286926e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 8.326672684688674e-16,
+   "orthogonality": 1.7763568394002505e-15
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 20,
+   "status": "ok",
+   "time": 2.3329630494117737e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 8.326672684688674e-16,
+   "orthogonality": 1.7763568394002505e-15
+  },
+  {
+   "method": "spherical",
+   "two_j": 20,
+   "status": "ok",
+   "time": 4.125002305954695e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 5.551115123125783e-16,
+   "orthogonality": 2.220446049250313e-15
+  },
+  {
+   "method": "wigner",
+   "two_j": 20,
+   "status": "ok",
+   "time": 6.804097210988402e-05,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 4.3298697960381105e-15,
+   "orthogonality": 9.103828801926284e-15
+  },
+  {
+   "method": "expm",
+   "two_j": 20,
+   "status": "ok",
+   "time": 1.6312493244186044e-05,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 7.216449660063518e-15,
+   "orthogonality": 1.9206858326015208e-14
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 20,
+   "status": "ok",
+   "time": 7.792026735842228e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.887379141862766e-15,
+   "orthogonality": 3.552713678800501e-15
+  },
+  {
+   "method": "textbook",
+   "two_j": 20,
+   "status": "ok",
+   "time": 0.0003356250235810876,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 6.8833827526759706e-15,
+   "orthogonality": 5.218048215738236e-15
+  },
+  {
+   "method": "sympy",
+   "two_j": 20,
+   "status": "ok",
+   "time": 0.02935945801436901,
+   "n_calls": 21,
+   "n_angles": 3,
+   "error": 8.167078124898808e-15,
+   "orthogonality": 7.66053886991358e-15
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 39,
+   "status": "ok",
+   "time": 7.874972652643919e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.2212453270876722e-15,
+   "orthogonality": 3.552713678800501e-15
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 39,
+   "status": "ok",
+   "time": 7.6669966802001e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.2212453270876722e-15,
+   "orthogonality": 3.552713678800501e-15
+  },
+  {
+   "method": "expm",
+   "two_j": 39,
+   "status": "ok",
+   "time": 3.7541030906140804e-05,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.0602629885170245e-14,
+   "orthogonality": 3.7192471324942744e-14
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 39,
+   "status": "ok",
+   "time": 3.495902637951076e-05,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 6.050715484207103e-15,
+   "orthogonality": 2.0761170560490427e-14
+  },
+  {
+   "method": "textbook",
+   "two_j": 39,
+   "status": "ok",
+   "time": 0.0019578954961616546,
+   "n_calls": 306,
+   "n_angles": 3,
+   "error": 2.8593238887708594e-12,
+   "orthogonality": 3.1668001554407965e-12
+  },
+  {
+   "method": "sympy",
+   "two_j": 39,
+   "status": "ok",
+   "time": 0.2600376249756664,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": 1.4127032876842804e-12,
+   "orthogonality": 1.564415263999308e-12
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 40,
+   "status": "ok",
+   "time": 8.417002391070127e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.2212453270876722e-15,
+   "orthogonality": 3.9968028886505635e-15
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 40,
+   "status": "ok",
+   "time": 8.333998266607523e-06,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.2212453270876722e-15,
+   "orthogonality": 3.9968028886505635e-15
+  },
+  {
+   "method": "spherical",
+   "two_j": 40,
+   "status": "ok",
+   "time": 1.3417040463536978e-05,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 8.881784197001252e-16,
+   "orthogonality": 2.4424906541753444e-15
+  },
+  {
+   "method": "wigner",
+   "two_j": 40,
+   "status": "ok",
+   "time": 0.00027195800794288516,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": NaN,
+   "orthogonality": NaN
+  },
+  {
+   "method": "expm",
+   "two_j": 40,
+   "status": "ok",
+   "time": 4.554103361442685e-05,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.0963452368173421e-14,
+   "orthogonality": 3.6193270602780103e-14
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 40,
+   "status": "ok",
+   "time": 3.720802487805486e-05,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 6.106226635438361e-15,
+   "orthogonality": 1.887379141862766e-14
+  },
+  {
+   "method": "textbook",
+   "two_j": 40,
+   "status": "ok",
+   "time": 0.0020919375238008797,
+   "n_calls": 288,
+   "n_angles": 3,
+   "error": 4.642924933406789e-12,
+   "orthogonality": 5.289102489314246e-12
+  },
+  {
+   "method": "sympy",
+   "two_j": 40,
+   "status": "ok",
+   "time": 0.25616379198618233,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": 2.5041010931481367e-12,
+   "orthogonality": 3.736122522468577e-12
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 99,
+   "status": "ok",
+   "time": 0.00011393750901333988,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.7763568394002505e-15,
+   "orthogonality": 8.770761894538737e-15
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 99,
+   "status": "ok",
+   "time": 0.00011737499153241515,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.7763568394002505e-15,
+   "orthogonality": 8.770761894538737e-15
+  },
+  {
+   "method": "expm",
+   "two_j": 99,
+   "status": "ok",
+   "time": 0.00019920850172638893,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 2.692845946228317e-13,
+   "orthogonality": 8.026912468039882e-13
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 99,
+   "status": "ok",
+   "time": 0.00048604150651954114,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.2045919817182948e-14,
+   "orthogonality": 4.929390229335695e-14
+  },
+  {
+   "method": "textbook",
+   "two_j": 99,
+   "status": "ok",
+   "time": 0.02668566646752879,
+   "n_calls": 24,
+   "n_angles": 3,
+   "error": 0.00024485302677570986,
+   "orthogonality": NaN
+  },
+  {
+   "method": "sympy",
+   "two_j": 99,
+   "status": "ok",
+   "time": 5.6612493339926,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": 0.0002680392266788123,
+   "orthogonality": 0.00023136690389358172
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 100,
+   "status": "ok",
+   "time": 0.0001142919936683029,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.3877787807814457e-15,
+   "orthogonality": 8.992806499463768e-15
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 100,
+   "status": "ok",
+   "time": 0.0001212499919347465,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.3877787807814457e-15,
+   "orthogonality": 8.992806499463768e-15
+  },
+  {
+   "method": "spherical",
+   "two_j": 100,
+   "status": "ok",
+   "time": 0.00010020803892984986,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.0495077029659683e-15,
+   "orthogonality": 6.8833827526759706e-15
+  },
+  {
+   "method": "wigner",
+   "two_j": 100,
+   "status": "ok",
+   "time": 0.001999999978579581,
+   "n_calls": 301,
+   "n_angles": 3,
+   "error": NaN,
+   "orthogonality": NaN
+  },
+  {
+   "method": "expm",
+   "two_j": 100,
+   "status": "ok",
+   "time": 0.0002043750137090683,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 2.8574365096289966e-13,
+   "orthogonality": 8.968381592922015e-13
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 100,
+   "status": "ok",
+   "time": 0.0005021250108256936,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 1.0630385460785874e-14,
+   "orthogonality": 6.661338147750939e-14
+  },
+  {
+   "method": "textbook",
+   "two_j": 100,
+   "status": "ok",
+   "time": 0.027429458510596305,
+   "n_calls": 24,
+   "n_angles": 3,
+   "error": 0.0004441035759286255,
+   "orthogonality": NaN
+  },
+  {
+   "method": "sympy",
+   "two_j": 100,
+   "status": "ok",
+   "time": 5.665340708044823,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": 0.0003244724100050361,
+   "orthogonality": 0.0003749097254075462
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 199,
+   "status": "ok",
+   "time": 0.00027720798971131444,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 4.107825191113079e-15,
+   "orthogonality": 1.84297022087776e-14
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 199,
+   "status": "ok",
+   "time": 0.0010953329619951546,
+   "n_calls": 547,
+   "n_angles": 3,
+   "error": 4.107825191113079e-15,
+   "orthogonality": 1.84297022087776e-14
+  },
+  {
+   "method": "expm",
+   "two_j": 199,
+   "status": "ok",
+   "time": 0.0009275624761357903,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 3.8345715491772125e-13,
+   "orthogonality": 1.5933920849420247e-12
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 199,
+   "status": "ok",
+   "time": 0.004320707987062633,
+   "n_calls": 141,
+   "n_angles": 3,
+   "error": 2.528532938583794e-14,
+   "orthogonality": 1.5298873279334657e-13
+  },
+  {
+   "method": "textbook",
+   "two_j": 199,
+   "status": "failed",
+   "note": "OverflowError: int too large to convert to float"
+  },
+  {
+   "method": "sympy",
+   "two_j": 199,
+   "status": "ok",
+   "time": 48.69682266697055,
+   "n_calls": 1,
+   "n_angles": 1,
+   "error": 6.447252697966421e-07,
+   "orthogonality": 7.91173523806421e-07
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 200,
+   "status": "ok",
+   "time": 0.0002792285231407732,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 3.2751579226442118e-15,
+   "orthogonality": 1.9095836023552692e-14
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 200,
+   "status": "ok",
+   "time": 0.001114458020310849,
+   "n_calls": 537,
+   "n_angles": 3,
+   "error": 3.2751579226442118e-15,
+   "orthogonality": 1.9095836023552692e-14
+  },
+  {
+   "method": "spherical",
+   "two_j": 200,
+   "status": "ok",
+   "time": 0.000573708035517484,
+   "n_calls": 600,
+   "n_angles": 3,
+   "error": 2.609024107869118e-15,
+   "orthogonality": 1.5654144647214707e-14
+  },
+  {
+   "method": "wigner",
+   "two_j": 200,
+   "status": "ok",
+   "time": 0.010704124986659735,
+   "n_calls": 57,
+   "n_angles": 3,
+   "error": NaN,
+   "orthogonality": NaN
+  },
+  {
+   "method": "expm",
+   "two_j": 200,
+   "status": "ok",
+   "time": 0.0010215829825028777,
+   "n_calls": 583,
+   "n_angles": 3,
+   "error": 3.8123670886847094e-13,
+   "orthogonality": 1.688649220454863e-12
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 200,
+   "status": "ok",
+   "time": 0.004390979505842552,
+   "n_calls": 138,
+   "n_angles": 3,
+   "error": 2.0788926136106056e-14,
+   "orthogonality": 1.2745360322696797e-13
+  },
+  {
+   "method": "sympy",
+   "two_j": 200,
+   "status": "ok",
+   "time": 47.98870774998795,
+   "n_calls": 1,
+   "n_angles": 1,
+   "error": 4.748350134337054e-07,
+   "orthogonality": 7.802238325416155e-07
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 399,
+   "status": "ok",
+   "time": 0.001684832968749106,
+   "n_calls": 353,
+   "n_angles": 3,
+   "error": 5.995204332975845e-15,
+   "orthogonality": 3.519406988061746e-14
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 399,
+   "status": "ok",
+   "time": 0.010560415976215154,
+   "n_calls": 57,
+   "n_angles": 3,
+   "error": 5.995204332975845e-15,
+   "orthogonality": 3.519406988061746e-14
+  },
+  {
+   "method": "expm",
+   "two_j": 399,
+   "status": "ok",
+   "time": 0.005265749990940094,
+   "n_calls": 115,
+   "n_angles": 3,
+   "error": 3.933658954125008e-13,
+   "orthogonality": 3.2021052476238765e-12
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 399,
+   "status": "ok",
+   "time": 0.03458624999620952,
+   "n_calls": 18,
+   "n_angles": 3,
+   "error": 3.441691376337985e-14,
+   "orthogonality": 4.1733283495659634e-13
+  },
+  {
+   "method": "sympy",
+   "two_j": 399,
+   "status": "skipped",
+   "note": "predicted 381 s per matrix"
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 400,
+   "status": "ok",
+   "time": 0.0017133745132014155,
+   "n_calls": 346,
+   "n_angles": 3,
+   "error": 4.163336342344337e-15,
+   "orthogonality": 3.6415315207705135e-14
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 400,
+   "status": "ok",
+   "time": 0.010628541989717633,
+   "n_calls": 57,
+   "n_angles": 3,
+   "error": 4.163336342344337e-15,
+   "orthogonality": 3.6415315207705135e-14
+  },
+  {
+   "method": "spherical",
+   "two_j": 400,
+   "status": "ok",
+   "time": 0.0037605830002576113,
+   "n_calls": 161,
+   "n_angles": 3,
+   "error": 2.192690473634684e-15,
+   "orthogonality": 2.5424107263916085e-14
+  },
+  {
+   "method": "wigner",
+   "two_j": 400,
+   "status": "ok",
+   "time": 0.06671691697556525,
+   "n_calls": 9,
+   "n_angles": 3,
+   "error": NaN,
+   "orthogonality": NaN
+  },
+  {
+   "method": "expm",
+   "two_j": 400,
+   "status": "ok",
+   "time": 0.005830999987665564,
+   "n_calls": 105,
+   "n_angles": 3,
+   "error": 5.251216128598912e-13,
+   "orthogonality": 3.291811268013589e-12
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 400,
+   "status": "ok",
+   "time": 0.03485441647353582,
+   "n_calls": 18,
+   "n_angles": 3,
+   "error": 3.6942671144402084e-14,
+   "orthogonality": 4.156675004196586e-13
+  },
+  {
+   "method": "sympy",
+   "two_j": 400,
+   "status": "skipped",
+   "note": "predicted 384 s per matrix"
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 999,
+   "status": "ok",
+   "time": 0.027570416481466964,
+   "n_calls": 24,
+   "n_angles": 3,
+   "error": 6.9111383282915995e-15,
+   "orthogonality": 9.092726571680032e-14
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 999,
+   "status": "ok",
+   "time": 0.1908395625068806,
+   "n_calls": 6,
+   "n_angles": 3,
+   "error": 6.9111383282915995e-15,
+   "orthogonality": 9.092726571680032e-14
+  },
+  {
+   "method": "expm",
+   "two_j": 999,
+   "status": "ok",
+   "time": 0.07374679099302739,
+   "n_calls": 9,
+   "n_angles": 3,
+   "error": 5.920958168204038e-14,
+   "orthogonality": 9.554579349924097e-13
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 999,
+   "status": "ok",
+   "time": 0.5789140830165707,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": 7.302491944471967e-14,
+   "orthogonality": 1.3317125180378753e-12
+  },
+  {
+   "method": "sympy",
+   "two_j": 999,
+   "status": "skipped",
+   "note": "predicted 5981 s per matrix"
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 1000,
+   "status": "ok",
+   "time": 0.027720645477529615,
+   "n_calls": 24,
+   "n_angles": 3,
+   "error": 7.993605777301127e-15,
+   "orthogonality": 9.092726571680032e-14
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 1000,
+   "status": "ok",
+   "time": 0.19111500002327375,
+   "n_calls": 6,
+   "n_angles": 3,
+   "error": 7.993605777301127e-15,
+   "orthogonality": 9.092726571680032e-14
+  },
+  {
+   "method": "spherical",
+   "two_j": 1000,
+   "status": "ok",
+   "time": 0.05103733352734707,
+   "n_calls": 12,
+   "n_angles": 3,
+   "error": 3.747002708109903e-15,
+   "orthogonality": 4.984901380566953e-14
+  },
+  {
+   "method": "wigner",
+   "two_j": 1000,
+   "status": "ok",
+   "time": 0.8796450839727186,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": NaN,
+   "orthogonality": NaN
+  },
+  {
+   "method": "expm",
+   "two_j": 1000,
+   "status": "ok",
+   "time": 0.0708133544831071,
+   "n_calls": 10,
+   "n_angles": 3,
+   "error": 6.022959908591474e-14,
+   "orthogonality": 9.42801392511683e-13
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 1000,
+   "status": "ok",
+   "time": 0.5802226249943487,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": 1.3003487175922146e-13,
+   "orthogonality": 1.3460343950555398e-12
+  },
+  {
+   "method": "sympy",
+   "two_j": 1000,
+   "status": "skipped",
+   "note": "predicted 5999 s per matrix"
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 1999,
+   "status": "ok",
+   "time": 0.22361295903101563,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": 1.6403545188836688e-14,
+   "orthogonality": 1.836308882730009e-13
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 1999,
+   "status": "ok",
+   "time": 1.5975581249804236,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": 1.6403545188836688e-14,
+   "orthogonality": 1.836308882730009e-13
+  },
+  {
+   "method": "expm",
+   "two_j": 1999,
+   "status": "ok",
+   "time": 0.6100375420064665,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": 8.010259122670504e-14,
+   "orthogonality": 1.9065860001887813e-12
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 1999,
+   "status": "ok",
+   "time": 4.723325750033837,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": NaN,
+   "orthogonality": NaN
+  },
+  {
+   "method": "sympy",
+   "two_j": 1999,
+   "status": "skipped",
+   "note": "predicted 47917 s per matrix"
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 2000,
+   "status": "ok",
+   "time": 0.22513679100666195,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": 9.742207041085749e-15,
+   "orthogonality": 1.8318679906315083e-13
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 2000,
+   "status": "ok",
+   "time": 1.584458084020298,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": 9.742207041085749e-15,
+   "orthogonality": 1.8318679906315083e-13
+  },
+  {
+   "method": "spherical",
+   "two_j": 2000,
+   "status": "ok",
+   "time": 0.3828965419670567,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": 5.214578768786282e-15,
+   "orthogonality": 9.658940314238862e-14
+  },
+  {
+   "method": "wigner",
+   "two_j": 2000,
+   "status": "ok",
+   "time": 6.543577582982834,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": NaN,
+   "orthogonality": NaN
+  },
+  {
+   "method": "expm",
+   "two_j": 2000,
+   "status": "ok",
+   "time": 0.6262948340154253,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": 8.219119829178112e-14,
+   "orthogonality": 1.9081403124232565e-12
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 2000,
+   "status": "ok",
+   "time": 4.7025466250488535,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": NaN,
+   "orthogonality": NaN
+  },
+  {
+   "method": "sympy",
+   "two_j": 2000,
+   "status": "skipped",
+   "note": "predicted 47989 s per matrix"
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 3999,
+   "status": "ok",
+   "time": 1.823912542022299,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": 1.2836953722228372e-14,
+   "orthogonality": 3.7558844923069046e-13
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 3999,
+   "status": "ok",
+   "time": 12.882128792000003,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": 1.2836953722228372e-14,
+   "orthogonality": 3.7558844923069046e-13
+  },
+  {
+   "method": "expm",
+   "two_j": 3999,
+   "status": "ok",
+   "time": 4.697108916996513,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": 1.1256967580308697e-13,
+   "orthogonality": 3.818834137803151e-12
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 3999,
+   "status": "ok",
+   "time": 37.97054891695734,
+   "n_calls": 1,
+   "n_angles": 1,
+   "error": NaN,
+   "orthogonality": NaN
+  },
+  {
+   "method": "sympy",
+   "two_j": 3999,
+   "status": "skipped",
+   "note": "predicted 383622 s per matrix"
+  },
+  {
+   "method": "fast_wigner_d",
+   "two_j": 4000,
+   "status": "ok",
+   "time": 1.759840417013038,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": 2.223221606811876e-14,
+   "orthogonality": 3.7403413699621524e-13
+  },
+  {
+   "method": "fast_wigner_d_1thread",
+   "two_j": 4000,
+   "status": "ok",
+   "time": 12.867541332961991,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": 2.223221606811876e-14,
+   "orthogonality": 3.7403413699621524e-13
+  },
+  {
+   "method": "spherical",
+   "two_j": 4000,
+   "status": "ok",
+   "time": 76.54270600003656,
+   "n_calls": 1,
+   "n_angles": 1,
+   "error": NaN,
+   "orthogonality": NaN
+  },
+  {
+   "method": "wigner",
+   "two_j": 4000,
+   "status": "ok",
+   "time": 50.49427291698521,
+   "n_calls": 1,
+   "n_angles": 1,
+   "error": NaN,
+   "orthogonality": NaN
+  },
+  {
+   "method": "expm",
+   "two_j": 4000,
+   "status": "ok",
+   "time": 4.787576958013233,
+   "n_calls": 3,
+   "n_angles": 3,
+   "error": 1.1521339438047562e-13,
+   "orthogonality": 3.816724714056363e-12
+  },
+  {
+   "method": "eval_jacobi",
+   "two_j": 4000,
+   "status": "ok",
+   "time": 38.10945475002518,
+   "n_calls": 1,
+   "n_angles": 1,
+   "error": NaN,
+   "orthogonality": NaN
+  },
+  {
+   "method": "sympy",
+   "two_j": 4000,
+   "status": "skipped",
+   "note": "predicted 383910 s per matrix"
+  }
+ ]
+}
