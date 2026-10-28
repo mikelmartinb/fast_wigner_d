@@ -1,7 +1,7 @@
 # fast-wigner-d
 
 Wigner *d*- and *D*-matrices for integer and half-integer spin and any real angle. A small Cython
-extension, optionally parallelised with OpenMP, whose only runtime dependency is NumPy.
+extension that can optionally be parallelised with OpenMP.
 
 - Half-integer *j* is supported like integer *j*. Recursion-based libraries such as
   [`spherical`](https://github.com/moble/spherical) and [`wigner`](https://github.com/ntessore/wigner)
@@ -47,13 +47,13 @@ python -c "import fast_wigner_d as f; print(f.__version__, f.OPENMP_ENABLED)"
 import numpy as np
 from fast_wigner_d import wigner_d, wigner_D
 
-d = wigner_d(3/2, 0.7)      # (4, 4) float64, d[m' + j, m + j] = d^j_{m'm}(0.7)
-d[3, 2]                     # d^{3/2}_{3/2,1/2}(0.7) = -sqrt(3) cos²(0.35) sin(0.35)
+d = wigner_d(3/2, 0.7)      
+d[3, 2]                     
 
-wigner_d(1000.5, 2.0)                          # (2002, 2002), |d dᵀ - 1| ~ 1e-13
-wigner_d(1, np.linspace(0, np.pi, 50)).shape   # (50, 3, 3), one matrix per angle
-wigner_D(1/2, 0.3, 1.2, -0.4)                  # complex (2, 2), z-y-z Euler angles
-wigner_d(500, 1.0, num_threads=1)              # limit the OpenMP threads of one call
+wigner_d(1000.5, 2.0)                          
+wigner_d(1, np.linspace(0, np.pi, 50)).shape   
+wigner_D(1/2, 0.3, 1.2, -0.4)                  
+wigner_d(500, 1.0, num_threads=1)              
 ```
 
 `j` can be an `int`, a `float` (`2.5`) or a `fractions.Fraction`. Rows and columns run over
@@ -75,15 +75,12 @@ d^{1/2}(β) = [[ cos(β/2), sin(β/2)],      d^1_{10}(β) = -sin(β)/√2
 (rows and columns m = -1/2, +1/2)
 ```
 
-Wikipedia, `spherical`, ntessore's `wigner` and sympy's `Rotation.d` use the same conventions
-(checked numerically). `sympy.physics.wigner.wigner_d_small` (Edmonds) returns the transpose,
-d(−β), with rows ordered from m = +j. Identities:
+Identities:
 d<sup>j</sup><sub>m′m</sub>(β) = (−1)<sup>m′−m</sup> d<sup>j</sup><sub>mm′</sub>(β) = d<sup>j</sup><sub>−m,−m′</sub>(β),
 d(−β) = d(β)ᵀ, d(β + 2π) = (−1)<sup>2j</sup> d(β).
 
 ## Benchmarks
 
-<!-- PyPI needs absolute image URLs (raw.githubusercontent.com) -->
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="benchmarks/results/benchmark-dark.png">
   <img alt="Time per matrix and largest error versus spin j for fast-wigner-d and six other methods" src="benchmarks/results/benchmark.png">
@@ -131,53 +128,13 @@ Half-integer spin (not supported by `spherical` or `wigner`):
   `expm` is 1.3–3.3× slower and up to 100× less accurate. The other methods fail or lose accuracy
   by *j* ≈ 50 (textbook sum, sympy) or *j* ≈ 1000 (`eval_jacobi`).
 
-The methods:
-
-- [`spherical`](https://github.com/moble/spherical): `Wigner(ℓ, ell_min=ℓ).d(exp(iβ))`,
-  Gumerov–Duraiswami recursion in numba, integer ℓ only.
-- [`wigner`](https://github.com/ntessore/wigner): `wigner_dl` returns d<sup>ℓ</sup><sub>m₁m₂</sub>
-  over a range of ℓ at fixed (m₁, m₂), its intended use, so a full matrix takes (2ℓ+1)² calls. Its
-  starting value uses a 32-bit integer binomial that overflows for max(|m₁|, |m₂|) ≥ 17, hence the
-  NaNs from ℓ = 17. Elements with smaller |m| are accurate.
-- `scipy.linalg.expm(-1j * beta * J_y)` (as a real matrix): the generic, QuTiP-style approach,
-  with dense O(*n*³) linear algebra.
-- `scipy.special.eval_jacobi`: the same Jacobi formula in plain float64. Overflow and underflow
-  give inf · 0 = NaN from *j* ≈ 1000.
-- Textbook sum: Wigner's explicit sum in float64, as in many hand-written codes. Cancellation gives
-  4 × 10⁻⁴ errors at *j* = 50, and 171! overflows a double (2*j* > 170).
-- `sympy.physics.wigner.wigner_d_small` with a float angle: built from sympy expressions on each
-  call and evaluated with 15 digits, hence slow and subject to the same cancellation.
-
-All sizes are in [`benchmarks/results/results.md`](benchmarks/results/results.md). To reproduce:
+To reproduce:
 
 ```bash
 pip install ".[benchmark]"
 python benchmarks/run_benchmarks.py     # ~15 min (--quick: 2j <= 200)
 python benchmarks/plot_benchmarks.py
 ```
-
-## Method
-
-For m′ ≥ |m| (the rest of the matrix follows by symmetry),
-
-```text
-d^j_{m'm}(β) = (-1)^(m'-m) sqrt[(j+m')! (j-m')! / ((j+m)! (j-m)!)]
-               × sin(β/2)^(m'-m) cos(β/2)^(m'+m) P_{j-m'}^{(m'-m, m'+m)}(cos β)
-```
-
-with *P* a Jacobi polynomial. Each element is computed independently:
-
-1. The prefactor and the half-angle powers are combined in log space, with log-factorials tabulated
-   in double-double precision (plain `lgamma` loses about four digits at *j* = 1000).
-2. *P* comes from the three-term recurrence (DLMF §18.9), rescaled by exact powers of two above 2¹⁰⁰.
-3. Near β = 0 and π, where `cos(β)` resolves 1 ∓ cos β poorly, the recurrence uses 2 sin²(β/2) or
-   2 cos²(β/2) instead.
-4. The signs of sin(β/2) and cos(β/2) are applied separately, so any real β works.
-5. Rows are split over OpenMP threads for 2*j* ≥ 96, and smaller matrices run serially.
-
-The cost is O(*j*³) per matrix (about *j*² elements, O(*j*) each). Absolute errors grow from about
-10⁻¹⁶ at small *j* to 2 × 10⁻¹⁴ at *j* = 2000 for generic angles. The worst case is small angles at
-large *j*: about 10⁻¹² for β = 10⁻³ and *j* = 1000, where `spherical` stays near 10⁻¹⁵.
 
 ## API
 
