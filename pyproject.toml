@@ -59,7 +59,7 @@ test-command = "pytest {project}/tests -q"
 environment = { FAST_WIGNER_D_OPENMP = "1" }
 
 [tool.cibuildwheel.macos]
-# libomp from conda-forge (targets macOS 11, unlike Homebrew); delocate bundles it
+# libomp from conda-forge (targets macOS 11, unlike Homebrew), bundled by delocate
 before-all = [
     "curl -Ls https://micro.mamba.pm/api/micromamba/osx-$(uname -m | sed s/x86_64/64/)/latest | tar -xj -C /tmp bin/micromamba",
     "/tmp/bin/micromamba create -y -p /tmp/libomp -c conda-forge llvm-openmp",

@@ -1,8 +1,11 @@
 """Build the Cython extension, with OpenMP if a test program compiles with it.
 
-Environment variables: FAST_WIGNER_D_OPENMP=0 / 1 disables / requires OpenMP;
-LIBOMP_PREFIX locates libomp on macOS (Homebrew and CONDA_PREFIX are also
-searched); FAST_WIGNER_D_NATIVE=1 adds -march=native (local builds only).
+Environment variables:
+
+    FAST_WIGNER_D_OPENMP=0 / 1   disable / require OpenMP
+    LIBOMP_PREFIX                libomp location on macOS (Homebrew and CONDA_PREFIX
+                                 are also searched)
+    FAST_WIGNER_D_NATIVE=1       add -march=native (local builds only)
 """
 import os
 import subprocess

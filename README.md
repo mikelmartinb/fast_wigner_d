@@ -1,14 +1,14 @@
 # fast-wigner-d
 
 Wigner *d*- and *D*-matrices for integer and half-integer spin and any real angle. A small Cython
-extension that can optionally be parallelised with OpenMP.
+extension, optionally parallelised with OpenMP, whose only runtime dependency is NumPy.
 
 - Half-integer *j* is supported like integer *j*. Recursion-based libraries such as
   [`spherical`](https://github.com/moble/spherical) and [`wigner`](https://github.com/ntessore/wigner)
   support integer ℓ only.
 - Elements are computed from Jacobi polynomials in log space, so large *j* neither overflows nor
   gives NaN. Absolute errors are about 10⁻¹⁴ up to *j* = 2000 (checked against mpmath).
-- A small matrix takes about 1 µs; *j* = 1000 (2001 × 2001) takes 0.2 s on 10 cores.
+- A small matrix takes about 1 µs, and *j* = 1000 (2001 × 2001) takes 0.2 s on 10 cores.
 - Conventions of Varshalovich et al. ([below](#conventions)).
 
 ## Installation
@@ -25,13 +25,17 @@ cd fast-wigner-d
 pip install .
 ```
 
-OpenMP is optional and detected at build time; without it the results are the same, computed
+OpenMP is optional and detected at build time. Without it the results are the same, computed
 serially. gcc (Linux) and MSVC (Windows) support it directly. Apple clang needs libomp:
 `brew install libomp`, or `conda install -c conda-forge llvm-openmp` in a conda environment.
 
-Build options: `FAST_WIGNER_D_OPENMP=0` disables OpenMP and `=1` requires it; `LIBOMP_PREFIX`
-sets a non-standard libomp location (macOS); `FAST_WIGNER_D_NATIVE=1` adds `-march=native`
-(local builds only). To check a build:
+Build options (environment variables):
+
+- `FAST_WIGNER_D_OPENMP=0` disables OpenMP, and `=1` requires it.
+- `LIBOMP_PREFIX` sets a non-standard libomp location (macOS).
+- `FAST_WIGNER_D_NATIVE=1` adds `-march=native` (local builds only).
+
+To check a build:
 
 ```bash
 python -c "import fast_wigner_d as f; print(f.__version__, f.OPENMP_ENABLED)"
@@ -46,7 +50,7 @@ from fast_wigner_d import wigner_d, wigner_D
 d = wigner_d(3/2, 0.7)      # (4, 4) float64, d[m' + j, m + j] = d^j_{m'm}(0.7)
 d[3, 2]                     # d^{3/2}_{3/2,1/2}(0.7) = -sqrt(3) cos²(0.35) sin(0.35)
 
-wigner_d(1000.5, 2.0)                          # (2002, 2002); |d dᵀ - 1| ~ 1e-13
+wigner_d(1000.5, 2.0)                          # (2002, 2002), |d dᵀ - 1| ~ 1e-13
 wigner_d(1, np.linspace(0, np.pi, 50)).shape   # (50, 3, 3), one matrix per angle
 wigner_D(1/2, 0.3, 1.2, -0.4)                  # complex (2, 2), z-y-z Euler angles
 wigner_d(500, 1.0, num_threads=1)              # limit the OpenMP threads of one call
@@ -87,10 +91,10 @@ d(−β) = d(β)ᵀ, d(β + 2π) = (−1)<sup>2j</sup> d(β).
 
 Each cell is *time · largest error* for a full (2j+1) × (2j+1) matrix. Times are medians over
 β = 0.3, 1.1, 2.6, excluding one-off setup (`spherical`'s object and numba compilation, `expm`'s
-generator, `eval_jacobi`'s prefactors). Errors are absolute, against mpmath; **bold** means above
-10⁻⁸ or NaN. Apple M5 (10 cores), macOS 26.6, Python 3.14.7, NumPy 2.5.4 (Accelerate), SciPy 1.18.1,
+generator, `eval_jacobi`'s prefactors). Errors are absolute, against mpmath, and **bold** means
+above 10⁻⁸ or NaN. Apple M5 (10 cores), macOS 26.6, Python 3.14.7, NumPy 2.5.4 (Accelerate), SciPy 1.18.1,
 spherical 1.1.4, wigner 2025.1, sympy 1.14.0. fast-wigner-d uses all cores unless marked
-"1 thread"; the others are single-threaded except `expm` (BLAS).
+"1 thread". The others are single-threaded except `expm` (BLAS).
 
 | j | fast-wigner-d | fast-wigner-d<br>1 thread | spherical | wigner | scipy expm | scipy<br>eval_jacobi | textbook<br>sum | sympy |
 |---:|---|---|---|---|---|---|---|---|
@@ -119,25 +123,25 @@ Half-integer spin (not supported by `spherical` or `wigner`):
 | 3999/2 | 1.82 s · 1e-14 | 12.9 s · 1e-14 | 4.7 s · 1e-13 | 38 s · **NaN** | overflow | (too slow) |
 
 - *j* ≲ 10: fast-wigner-d is the fastest method tested (1–2 µs).
-- Large integer ℓ: on 10 cores fast-wigner-d is 1.7–2.2× faster than `spherical`; per core,
+- Large integer ℓ: on 10 cores fast-wigner-d is 1.7–2.2× faster than `spherical`. Per core,
   `spherical` is 2–4× faster (O(1) work per element instead of an O(*j*) recurrence) and up to 2×
-  more accurate. At ℓ = 2000 `spherical` returned NaN after 77 s; fast-wigner-d took 1.8 s (error
-  2 × 10⁻¹⁴).
+  more accurate. At ℓ = 2000 `spherical` returned NaN after 77 s, while fast-wigner-d took 1.8 s
+  (error 2 × 10⁻¹⁴).
 - Half-integer *j*: fast-wigner-d is the fastest method and at least as accurate as the others.
-  `expm` is 1.3–3.3× slower and up to 100× less accurate; the other methods fail or lose accuracy
+  `expm` is 1.3–3.3× slower and up to 100× less accurate. The other methods fail or lose accuracy
   by *j* ≈ 50 (textbook sum, sympy) or *j* ≈ 1000 (`eval_jacobi`).
 
 The methods:
 
 - [`spherical`](https://github.com/moble/spherical): `Wigner(ℓ, ell_min=ℓ).d(exp(iβ))`,
-  Gumerov–Duraiswami recursion in numba; integer ℓ only.
+  Gumerov–Duraiswami recursion in numba, integer ℓ only.
 - [`wigner`](https://github.com/ntessore/wigner): `wigner_dl` returns d<sup>ℓ</sup><sub>m₁m₂</sub>
   over a range of ℓ at fixed (m₁, m₂), its intended use, so a full matrix takes (2ℓ+1)² calls. Its
   starting value uses a 32-bit integer binomial that overflows for max(|m₁|, |m₂|) ≥ 17, hence the
-  NaNs from ℓ = 17; elements with smaller |m| are accurate.
-- `scipy.linalg.expm(-1j * beta * J_y)` (as a real matrix): the generic, QuTiP-style approach;
-  dense O(*n*³).
-- `scipy.special.eval_jacobi`: the same Jacobi formula in plain float64; overflow and underflow
+  NaNs from ℓ = 17. Elements with smaller |m| are accurate.
+- `scipy.linalg.expm(-1j * beta * J_y)` (as a real matrix): the generic, QuTiP-style approach,
+  with dense O(*n*³) linear algebra.
+- `scipy.special.eval_jacobi`: the same Jacobi formula in plain float64. Overflow and underflow
   give inf · 0 = NaN from *j* ≈ 1000.
 - Textbook sum: Wigner's explicit sum in float64, as in many hand-written codes. Cancellation gives
   4 × 10⁻⁴ errors at *j* = 50, and 171! overflows a double (2*j* > 170).
@@ -148,7 +152,7 @@ All sizes are in [`benchmarks/results/results.md`](benchmarks/results/results.md
 
 ```bash
 pip install ".[benchmark]"
-python benchmarks/run_benchmarks.py     # ~15 min; --quick for 2j <= 200
+python benchmarks/run_benchmarks.py     # ~15 min (--quick: 2j <= 200)
 python benchmarks/plot_benchmarks.py
 ```
 
@@ -169,7 +173,7 @@ with *P* a Jacobi polynomial. Each element is computed independently:
 3. Near β = 0 and π, where `cos(β)` resolves 1 ∓ cos β poorly, the recurrence uses 2 sin²(β/2) or
    2 cos²(β/2) instead.
 4. The signs of sin(β/2) and cos(β/2) are applied separately, so any real β works.
-5. Rows are split over OpenMP threads for 2*j* ≥ 96; smaller matrices run serially.
+5. Rows are split over OpenMP threads for 2*j* ≥ 96, and smaller matrices run serially.
 
 The cost is O(*j*³) per matrix (about *j*² elements, O(*j*) each). Absolute errors grow from about
 10⁻¹⁶ at small *j* to 2 × 10⁻¹⁴ at *j* = 2000 for generic angles. The worst case is small angles at
@@ -180,7 +184,7 @@ large *j*: about 10⁻¹² for β = 10⁻³ and *j* = 1000, where `spherical` st
 | Function | Returns |
 |---|---|
 | `wigner_d(j, beta, *, num_threads=None)` | real (2j+1, 2j+1) array, or `beta.shape + (2j+1, 2j+1)` |
-| `wigner_D(j, alpha, beta, gamma, *, num_threads=None)` | complex D-matrix; the angles broadcast |
+| `wigner_D(j, alpha, beta, gamma, *, num_threads=None)` | complex D-matrix (the angles broadcast) |
 | `get_wigner_d_matrix_optimized(j_times_2, beta, num_threads=0)` | the compiled kernel, taking 2j |
 | `OPENMP_ENABLED` | whether the build uses OpenMP |
 
