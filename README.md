@@ -1,7 +1,7 @@
 # fast-wigner-d
 
 Wigner *d*- and *D*-matrices for integer and half-integer spin and any real angle. A small Cython
-extension, optionally parallelised with OpenMP; the only runtime dependency is NumPy.
+extension that can optionally be parallelised with OpenMP.
 
 - Half-integer *j* is supported like integer *j*. Recursion-based libraries such as
   [`spherical`](https://github.com/moble/spherical) and [`wigner`](https://github.com/ntessore/wigner)
