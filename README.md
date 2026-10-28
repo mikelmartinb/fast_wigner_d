@@ -81,11 +81,6 @@ d(−β) = d(β)ᵀ, d(β + 2π) = (−1)<sup>2j</sup> d(β).
 
 ## Benchmarks
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="benchmarks/results/benchmark-dark.png">
-  <img alt="Time per matrix and largest error versus spin j for fast-wigner-d and six other methods" src="benchmarks/results/benchmark.png">
-</picture>
-
 Each cell is *time · largest error* for a full (2j+1) × (2j+1) matrix. Times are medians over
 β = 0.3, 1.1, 2.6, excluding one-off setup (`spherical`'s object and numba compilation, `expm`'s
 generator, `eval_jacobi`'s prefactors). Errors are absolute, against mpmath, and **bold** means
