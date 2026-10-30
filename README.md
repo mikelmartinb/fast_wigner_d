@@ -20,7 +20,7 @@ pip install fast-wigner-d
 Building from source requires a C compiler (pip installs Cython itself):
 
 ```bash
-git clone <repository-url> fast-wigner-d
+git clone https://github.com/mikelmartinb/fast_wigner_d.git fast-wigner-d
 cd fast-wigner-d
 pip install .
 ```
